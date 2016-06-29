@@ -1,5 +1,6 @@
 #import "DeviceSecurity.h"
 #import <Cordova/CDV.h>
+#import <LocalAuthentication/LocalAuthentication.h>
 
 @implementation DeviceSecurity
 
