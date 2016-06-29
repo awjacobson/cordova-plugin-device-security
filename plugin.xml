@@ -32,7 +32,12 @@
 
     <!-- android -->
     <platform name="android">
-    	<source-file src="src/android/DeviceSecurity.java" target-dir="src/org/apache/cordova/device" />
+      <config-file target="res/xml/config.xml" parent="/*">
+        <feature name="DeviceSecurity">
+          <param name="android-package" value="org.apache.cordova.devicesecurity.DeviceSecurity"/>
+        </feature>
+      </config-file>
+    	<source-file src="src/android/DeviceSecurity.java" target-dir="src/org/apache/cordova/devicesecurity" />
     </platform>
 
     <!-- ios -->
