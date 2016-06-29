@@ -3,12 +3,12 @@
 
 @implementation DeviceSecurity
 
-- (BOOL)doesDeviceHaveSecuritySetup:(CDVInvokedUrlCommand*)command
+- (void)doesDeviceHaveSecuritySetup:(CDVInvokedUrlCommand*)command
 {
-    BOOL isSecuritySetup = LAContext().canEvaluatePolicy(.DeviceOwnerAuthentication, error: nil)
-
-    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:isSecuritySetup];;
-            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    LAContext *context = [[LAContext alloc] init];
+    BOOL isSecuritySetup = [context canEvaluatePolicy:DeviceOwnerAuthentication error:nil];
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:isSecuritySetup];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
 @end
