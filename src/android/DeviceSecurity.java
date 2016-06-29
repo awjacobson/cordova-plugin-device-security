@@ -1,10 +1,37 @@
 package org.apache.cordova.devicesecurity;
 
 import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.CallbackContext;
+import org.apache.cordova.PluginResult;
+import org.json.JSONArray;
 import android.app.KeyguardManager;
+import android.content.Context;
 
 public class DeviceSecurity extends CordovaPlugin
 {
+	/**
+     * Executes the request and returns PluginResult.
+     *
+     * @param action                The action to execute.
+     * @param args          	    JSONArry of arguments for the plugin.
+     * @param callbackS=Context     The callback id used when calling back into JavaScript.
+     * @return              	    True if the action was valid.
+     * @throws JSONException 
+     */
+	@Override
+    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException
+    {
+        if (action.equals("doesDeviceHaveSecuritySetup"))
+        {
+        	Context context = this.cordova.getActivity();
+        	bool isSetup = this.doesDeviceHaveSecuritySetup(context);
+        	callbackContext.success(message);
+        	callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, isSetup));
+        	return true;
+        }
+        return false; // Returning false results in a "MethodNotFound" error.
+    }
+
 	/**
 	 * <p>Checks to see if the lock screen is set up with either a PIN / PASS / PATTERN</p>
 	 *
@@ -12,7 +39,7 @@ public class DeviceSecurity extends CordovaPlugin
 	 *
 	 * @return true if PIN, PASS or PATTERN set, false otherwise.
 	 */
-	public static boolean doesDeviceHaveSecuritySetup(Context context)
+	public boolean doesDeviceHaveSecuritySetup(Context context)
 	{
 	    KeyguardManager keyguardManager = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE); //api 16+
 
