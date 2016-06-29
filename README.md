@@ -18,5 +18,5 @@ function onDeviceReady() {
 
 ### Supported Platforms
 
-- Android API 16
-- iOS 9
+- Android API 16+
+- iOS 8+
