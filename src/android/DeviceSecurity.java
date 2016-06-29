@@ -1,7 +1,7 @@
-package org.apache.cordova.devicesecurity
+package org.apache.cordova.devicesecurity;
 
 import org.apache.cordova.CordovaPlugin;
-import android.app.KeyguardManager
+import android.app.KeyguardManager;
 
 public class DeviceSecurity extends CordovaPlugin
 {
