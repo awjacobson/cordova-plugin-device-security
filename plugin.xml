@@ -42,6 +42,13 @@
 
     <!-- ios -->
     <platform name="ios">
+      <config-file target="config.xml" parent="/*">
+        <feature name="DeviceSecurity">
+          <param name="ios-package" value="DeviceSecurity" />
+        </feature>
+      </config-file>
+      <header-file src="src/ios/DeviceSecurity.h" />
+      <source-file src="src/ios/DeviceSecurity.m" />
     </platform>
 
 </plugin>
