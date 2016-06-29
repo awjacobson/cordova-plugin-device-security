@@ -49,6 +49,7 @@
       </config-file>
       <header-file src="src/ios/DeviceSecurity.h" />
       <source-file src="src/ios/DeviceSecurity.m" />
+      <framework src="LocalAuthentication.framework" />
     </platform>
 
 </plugin>
