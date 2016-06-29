@@ -1,5 +1,7 @@
 # Device Security Cordova Plugin
 
+This plugin fills the use case where the mobile app should behave differently depending upon the device being secured by a PIN, password, etc. or not.
+
 This plugin defines a global `deviceSecurity` object which will make known if the device is secured via a PIN, password, or pattern.
 Although the object is in the global scope, it is not available until after the `deviceready` event.
 
