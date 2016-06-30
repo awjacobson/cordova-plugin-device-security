@@ -6,14 +6,19 @@
 
 - (void)doesDeviceHaveSecuritySetup:(CDVInvokedUrlCommand*)command
 {
+    NSLog(@"DeviceSecurity - entering %s", __PRETTY_FUNCTION__);
+
     BOOL isSecuritySetup = false;
 
     if([LAContext class]) // iOS 9.0+
     {
+        NSLog(@"DeviceSecurity - checking iOS >= 9.0");
         LAContext *context = [[LAContext alloc] init];
         isSecuritySetup = [context canEvaluatePolicy:LAPolicyDeviceOwnerAuthentication error:nil];
     }
+    else // iOS 8.0+
     {
+        NSLog(@"DeviceSecurity - checking iOS < 9.0");
         NSData* secret = [@"Device has passcode set?" dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *attributes = @{ (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
             (__bridge id)kSecAttrService: @"LocalDeviceServices",
@@ -27,6 +32,7 @@
         }
     }
 
+    NSLog(@"DeviceSecurity - isSecuritySetup=%d", isSecuritySetup);
     CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:isSecuritySetup];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
