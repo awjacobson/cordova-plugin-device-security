@@ -9,16 +9,16 @@
     NSLog(@"DeviceSecurity - entering %s", __PRETTY_FUNCTION__);
 
     BOOL isSecuritySetup = false;
+    [[[UIDevice currentDevice] systemVersion] floatValue];
+    NSLog(@"DeviceSecurity - determining for iOS version %f", systemVersion);
 
-    if([LAContext class]) // iOS 9.0+
+    if(systemVersion >= 9.0)
     {
-        NSLog(@"DeviceSecurity - checking iOS >= 9.0");
         LAContext *context = [[LAContext alloc] init];
         isSecuritySetup = [context canEvaluatePolicy:LAPolicyDeviceOwnerAuthentication error:nil];
     }
-    else // iOS 8.0+
+    else
     {
-        NSLog(@"DeviceSecurity - checking iOS < 9.0");
         NSData* secret = [@"Device has passcode set?" dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *attributes = @{ (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
             (__bridge id)kSecAttrService: @"LocalDeviceServices",
